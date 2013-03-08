@@ -23,48 +23,20 @@ function map_handler (itemstack, user, pointed_thing)
 		pos.y = pos.y + 1
         yaw = user:get_look_yaw()
         if yaw ~= nil then
+           -- Find rotation and texture based on yaw.
            yaw = math.deg(yaw)
            yaw = math.fmod (yaw, 360)
-           if yaw<0 then yaw = 360 - yaw end
-           if yaw>360 then yaw = yaw - 360 end
-           if      yaw<= 5 then yaw =  0 rotate = 90
-           elseif yaw<= 15 then yaw = 10 rotate = 90
-           elseif yaw<= 25 then yaw = 20 rotate = 90
-           elseif yaw<= 35 then yaw = 30 rotate = 90
-           elseif yaw<= 45 then yaw = 40 rotate = 90
-           elseif yaw<= 55 then yaw = 50 rotate = 90
-           elseif yaw<= 65 then yaw = 60 rotate = 90
-           elseif yaw<= 75 then yaw = 70 rotate = 90
-           elseif yaw<= 85 then yaw = 80 rotate = 90
-           elseif yaw<= 95 then yaw = 0  rotate = 180
-           elseif yaw<=105 then yaw = 10 rotate = 180
-           elseif yaw<=115 then yaw = 20 rotate = 180
-           elseif yaw<=125 then yaw = 30 rotate = 180
-           elseif yaw<=135 then yaw = 40 rotate = 180
-           elseif yaw<=145 then yaw = 50 rotate = 180
-           elseif yaw<=155 then yaw = 60 rotate = 180
-           elseif yaw<=165 then yaw = 70 rotate = 180
-           elseif yaw<=175 then yaw = 80 rotate = 180
-           elseif yaw<=185 then yaw =  0 rotate = 270
-           elseif yaw<=195 then yaw = 10 rotate = 270
-           elseif yaw<=205 then yaw = 20 rotate = 270
-           elseif yaw<=215 then yaw = 30 rotate = 270
-           elseif yaw<=225 then yaw = 40 rotate = 270
-           elseif yaw<=235 then yaw = 50 rotate = 270
-           elseif yaw<=245 then yaw = 60 rotate = 270
-           elseif yaw<=255 then yaw = 70 rotate = 270
-           elseif yaw<=265 then yaw = 80 rotate = 270
-           elseif yaw<=275 then yaw =  0 rotate = 0
-           elseif yaw<=285 then yaw = 10 rotate = 0
-           elseif yaw<=295 then yaw = 20 rotate = 0
-           elseif yaw<=305 then yaw = 30 rotate = 0
-           elseif yaw<=315 then yaw = 40 rotate = 0
-           elseif yaw<=325 then yaw = 50 rotate = 0
-           elseif yaw<=335 then yaw = 60 rotate = 0
-           elseif yaw<=245 then yaw = 70 rotate = 0
-           elseif yaw<=355 then yaw = 80 rotate = 0
-           elseif yaw<=365 then yaw =  0 rotate = 90
+           if yaw < 90 then
+              rotate = 90
+           elseif yaw < 180 then
+              rotate = 180
+           elseif yaw < 270 then
+              rotate = 270
+           else
+              rotate = 0
            end
+           yaw = math.fmod(yaw, 90)
+           yaw = math.floor(yaw / 10) * 10
         end
 
 		--Localise some global minetest variables for speed.
